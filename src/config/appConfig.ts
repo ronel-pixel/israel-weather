@@ -9,12 +9,13 @@ export const CITIES_API_URL =
   "https://data.gov.il/api/3/action/datastore_search?resource_id=8f714b6f-c35c-4b40-a0e7-547b675eee0e&limit=1500";
 
 /**
- * WeatherAPI key.
- * In production set VITE_WEATHER_API_KEY in your .env file.
- * The literal below is a development-only fallback.
+ * WeatherAPI key — loaded exclusively from the .env file.
+ * If missing, the app will log an error and API calls will fail.
  */
-const WEATHER_API_KEY: string =
-  import.meta.env.VITE_WEATHER_API_KEY ?? "b67c0e38d0264b1ba9a75052261002";
+const WEATHER_API_KEY: string = import.meta.env.VITE_WEATHER_API_KEY;
+
+if (!WEATHER_API_KEY)
+  console.error("Weather API Key is missing! Please check your .env file.");
 
 /** WeatherAPI base URL */
 const WEATHER_API_BASE = "https://api.weatherapi.com/v1";
